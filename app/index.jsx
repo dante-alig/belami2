@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import { router } from "expo-router"; // Suppression de useNavigation
+import { router } from "expo-router"; 
 
 export default function AuthScreen() {
   // Suppression de React.useLayoutEffect car inutile si vous utilisez expo-router

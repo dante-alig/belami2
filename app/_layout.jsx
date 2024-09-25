@@ -3,10 +3,10 @@ import { Tabs } from "expo-router";
 import { View, StyleSheet } from "react-native";
 import ExpertUser from "../icon/User_expert.svg";
 import ProfilUser from "../icon/User_Circle.svg";
-import Tchat from "../icon/Chat.svg";
+import Tchat from "../icon/Chat_Dots.svg";
 import ExpertUserActive from "../icon/User_expert_active.svg";
 import ProfilUserActive from "../icon/User_Circle_active.svg";
-import TchatActive from "../icon/Chat_active.svg";
+import TchatActive from "../icon/Chat_Dots_active.svg";
 
 export default function Layout() {
   return (
@@ -41,7 +41,7 @@ export default function Layout() {
           }}
         />
         <Tabs.Screen
-          name="(stack)/ia"
+          name="(stack)"
           options={{
             tabBarIcon: ({ focused }) =>
               focused ? (

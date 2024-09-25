@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import visuel from "../../images/visuel.svg";
 import Constants from "expo-constants";
 import { router } from "expo-router";
 import {
@@ -10,7 +9,7 @@ import {
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
 
-export default function IaScreen() {
+export default function HistoryScreen() {
   let [fontsLoaded] = useFonts({
     Inter_600SemiBold,
     Inter_500Medium,
@@ -20,7 +19,7 @@ export default function IaScreen() {
     <>
       <StatusBar translucent={true} style="light" />
       <View style={styles.container}>
-        <Image source={visuel} style={styles.image} />
+        <View style={styles.historyBox}></View>
         <View style={styles.buttonBox}>
           <Pressable style={styles.button2}>
             <Text style={styles.titlePres}>Assistant IA</Text>
@@ -35,7 +34,7 @@ export default function IaScreen() {
               router.push("/history"); // Utilisation correcte de router.push
             }}
           >
-            <Text style={styles.txtCenter}>Lancer une discution</Text>
+            <Text style={styles.txtCenter}>Nouvelle conversation</Text>
           </Pressable>
         </View>
       </View>
@@ -94,9 +93,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: "Inter_700Bold",
   },
-  image: {
-    height: 451,
-    width: "95%",
-    objectFit: "fill",
+  historyBox: {
+    width: 420,
+    height: 254,
+    backgroundColor: "grey",
   },
 });
