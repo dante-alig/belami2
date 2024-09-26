@@ -1,40 +1,33 @@
-import { useState, useEffect } from "react";
 import { StyleSheet, View, Image } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
 import ButtonCta from "../../../components/buttonCta";
 import colors from "../../../assets/style/colors";
-import * as ImagePicker from "expo-image-picker";
+import { GlobalContext } from "../../../context/globalContext";
+import { getPermissionAndGetPicture } from "../../../services/imagePickerService";
+import { askGpt } from "../../../services/gptService";
 
 const Tchat = () => {
-  const [selectedPicture, setSelectedPicture] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const link = () => {};
-
-  //   ------ACCES AUX PHOTOS -------
-
-  const getPermissionAndGetPicture = async () => {
-    //Demander le droit d'accéder à la galerie
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status === "granted") {
-      //Ouvrir la galerie photo
-      const result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: true,
-        aspect: [1, 1],
-      });
-
-      if (result.canceled === true) {
-        alert("Pas de photo sélectionnée");
-      } else {
-        setSelectedPicture(result.assets[0].uri);
-      }
-    } else {
-      alert("Permission refusée");
-    }
-  };
+  const [loading, setLoading] = useState(false);
+  const {
+    selectedPicture,
+    setSelectedPicture,
+    chatLog,
+    setChatLog,
+    gptMode,
+    setGptMode,
+    gptResponse,
+    setGptResponse,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
-    getPermissionAndGetPicture();
+    getPermissionAndGetPicture(setSelectedPicture, setChatLog);
   }, []);
+
+  const link = () => {
+    console.log("image >>>>>>", chatLog);
+    askGpt(selectedPicture, gptMode, setChatLog, setLoading);
+    console.log("reponse de gpt >>>>>>", gptResponse);
+  };
 
   return (
     <View style={styles.container}>
