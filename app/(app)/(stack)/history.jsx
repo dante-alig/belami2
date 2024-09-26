@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet, Modal, Dimensions } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import ButtonCta from "../../components/buttonCta";
-import ButtonModal from "../../components/buttonModal";
-import ButtonInfos from "../../components/buttonInfos";
-import ProfilHistory from "../../components/profilHistory";
+import ButtonCta from "../../../components/buttonCta";
+import ButtonModal from "../../../components/buttonModal";
+import ButtonInfos from "../../../components/buttonInfos";
+import ProfilHistory from "../../../components/profilHistory";
 import { useFonts, Inter_700Bold } from "@expo-google-fonts/inter";
-import colors from "../../assets/style/colors";
+import colors from "../../../assets/style/colors";
 import { router } from "expo-router";
 
 export default function HistoryScreen() {

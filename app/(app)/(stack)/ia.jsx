@@ -1,9 +1,9 @@
 import { View, StyleSheet, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import visuel from "../../images/visuel.png";
-import ButtonCta from "../../components/buttonCta";
-import ButtonInfos from "../../components/buttonInfos";
-import colors from "../../assets/style/colors";
+import visuel from "../../../images/visuel.png";
+import ButtonCta from "../../../components/buttonCta";
+import ButtonInfos from "../../../components/buttonInfos";
+import colors from "../../../assets/style/colors";
 import { router } from "expo-router";
 
 export default function IaScreen() {

@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import ButtonCta from "../../components/buttonCta";
-import colors from "../../assets/style/colors";
+import ButtonCta from "../../../components/buttonCta";
+import colors from "../../../assets/style/colors";
 
 const Tchat = () => {
   const link = () => {};
