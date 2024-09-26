@@ -6,9 +6,12 @@ import ButtonModal from "../../components/buttonModal";
 import ButtonInfos from "../../components/buttonInfos";
 import ProfilHistory from "../../components/profilHistory";
 import { useFonts, Inter_700Bold } from "@expo-google-fonts/inter";
+import colors from "../../assets/style/colors";
+import { router } from "expo-router";
 
 export default function HistoryScreen() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [secondModalVisible, setSecondModalVisible] = useState(false); // État pour la deuxième modal
 
   let [fontsLoaded] = useFonts({
     Inter_700Bold,
@@ -16,6 +19,16 @@ export default function HistoryScreen() {
 
   const openModal = () => {
     setModalVisible(true);
+  };
+
+  const openSecondModal = () => {
+    setModalVisible(false);
+    setSecondModalVisible(true);
+  };
+
+  const launchTchat = () => {
+    router.push("tchat");
+    setSecondModalVisible(false);
   };
 
   const screenHeight = Dimensions.get("window").height;
@@ -38,7 +51,7 @@ export default function HistoryScreen() {
         </View>
       </View>
 
-      {/* Modal */}
+      {/* Première Modal */}
       <Modal
         transparent={true}
         animationType="slide"
@@ -47,11 +60,10 @@ export default function HistoryScreen() {
       >
         <View style={styles.modalOverlay}>
           <View style={[styles.modalContent, { height: screenHeight / 2 }]}>
-            {/* Contenu de la modal ici */}
             <Text style={styles.textAction}>Que voulez-vous faire ?</Text>
             <ButtonModal
-              func={() => setModalVisible(false)}
-              CtaTitle="Briser la glaçe"
+              func={openSecondModal} // Ouvre la deuxième modal
+              CtaTitle="Briser la glace"
             />
             <ButtonModal
               func={() => setModalVisible(false)}
@@ -68,6 +80,27 @@ export default function HistoryScreen() {
           </View>
         </View>
       </Modal>
+
+      {/* Deuxième Modal */}
+      <Modal
+        transparent={true}
+        animationType="slide"
+        visible={secondModalVisible}
+        onRequestClose={() => setSecondModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContent, { height: screenHeight / 2 }]}>
+            <Text style={styles.textAction}>
+              Choisissez une image à analyser
+            </Text>
+            <ButtonModal func={launchTchat} CtaTitle="photo" />
+            <ButtonModal
+              func={() => setSecondModalVisible(false)}
+              CtaTitle="caméra"
+            />
+          </View>
+        </View>
+      </Modal>
     </>
   );
 }
@@ -76,7 +109,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "black",
+    backgroundColor: colors.darkness,
     height: "100%",
     width: "100%",
   },
@@ -97,9 +130,11 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     justifyContent: "center",
     alignItems: "center",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
   textAction: {
-    fontSize: 19,
+    fontSize: 18,
     fontFamily: "Inter_700Bold",
     color: "white",
     marginBottom: 25,
