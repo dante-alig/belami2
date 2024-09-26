@@ -64,12 +64,6 @@ export default function Layout() {
             tabBarLabel: "Profil", // Aucune étiquette (texte)
           }}
         />
-        <Tabs.Screen
-          name="index"
-          options={{
-            tabBarButton: () => null, // Cache l'onglet
-          }}
-        />
       </Tabs>
     </View>
   );
