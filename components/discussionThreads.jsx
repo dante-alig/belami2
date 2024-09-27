@@ -4,12 +4,16 @@ import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
 import React, { useContext, useEffect } from "react";
 import colors from "../assets/style/colors";
 import emojis from "../utils/emojis";
+import loadingAnim from "../assets/loading.gif";
 
 const DiscussionThreads = () => {
   let [fontsLoaded] = useFonts({
     Inter_400Regular,
   });
-  const { chatLog } = useContext(GlobalContext);
+  const { chatLog, loading } = useContext(GlobalContext);
+  useEffect(() => {
+    console.log(loading);
+  }, [loading]);
 
   return (
     <View>
@@ -31,6 +35,17 @@ const DiscussionThreads = () => {
           )
         }
       />
+      {loading && (
+        <View style={styles.containerAI}>
+          <View style={styles.tons}>
+            <Text style={styles.emoji}>🌐</Text>
+          </View>
+          <View style={styles.messageContainer}>
+            <Image style={styles.animate} source={loadingAnim} />
+            <Text style={styles.messageSet}>Loading</Text>
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -55,12 +70,11 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
   messageContainer: {
-    backgroundColor: colors.lightSmooth,
+    backgroundColor: colors.darkSmooth,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 0,
-    margin: 7,
     marginLeft: 5,
     width: "70%",
   },
@@ -81,5 +95,9 @@ const styles = StyleSheet.create({
 
   emoji: {
     fontSize: 20,
+  },
+  animate: {
+    width: 60,
+    height: 60,
   },
 });

@@ -1,5 +1,5 @@
-import { StyleSheet, View, Image } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import React, { useContext, useEffect } from "react";
 import ButtonCta from "../../../components/buttonCta";
 import colors from "../../../assets/style/colors";
 import { GlobalContext } from "../../../context/globalContext";
@@ -8,26 +8,26 @@ import { askGpt } from "../../../services/gptService";
 import DiscussionThreads from "../../../components/discussionThreads";
 
 const Tchat = () => {
-  const [loading, setLoading] = useState(false);
   const {
     selectedPicture,
     setSelectedPicture,
-    chatLog,
     setChatLog,
     gptMode,
-    setGptMode,
-    gptResponse,
-    setGptResponse,
+    setLoading,
   } = useContext(GlobalContext);
 
   useEffect(() => {
-    getPermissionAndGetPicture(setSelectedPicture, setChatLog);
-  }, []);
+    if (selectedPicture) {
+      askGpt(selectedPicture, gptMode, setChatLog, setLoading);
+      askGpt(selectedPicture, gptMode, setChatLog, setLoading);
+      askGpt(selectedPicture, gptMode, setChatLog, setLoading);
+    } else {
+      getPermissionAndGetPicture(setSelectedPicture, setChatLog);
+    }
+  }, [selectedPicture]);
 
   const link = () => {
-    console.log("image >>>>>>", chatLog);
-    askGpt(selectedPicture, gptMode, setChatLog, setLoading);
-    console.log("reponse de gpt >>>>>>", gptResponse);
+    getPermissionAndGetPicture(setSelectedPicture, setChatLog);
   };
 
   return (

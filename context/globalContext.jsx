@@ -6,6 +6,7 @@ export const GlobalProvider = ({ children }) => {
   const [chatLog, setChatLog] = useState("");
   const [gptMode, setGptMode] = useState({ mode: "aleatoire", id: "1" });
   const [gptResponse, setGptResponse] = useState("");
+  const [loading, setLoading] = useState("");
 
   return (
     <GlobalContext.Provider
@@ -18,6 +19,8 @@ export const GlobalProvider = ({ children }) => {
         setGptMode,
         gptResponse,
         setGptResponse,
+        loading,
+        setLoading,
       }}
     >
       {children}
