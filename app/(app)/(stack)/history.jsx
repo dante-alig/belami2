@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Modal, Dimensions } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ButtonCta from "../../../components/buttonCta";
 import ButtonModal from "../../../components/buttonModal";
 import ButtonInfos from "../../../components/buttonInfos";
@@ -8,10 +8,20 @@ import ProfilHistory from "../../../components/profilHistory";
 import { useFonts, Inter_700Bold } from "@expo-google-fonts/inter";
 import colors from "../../../assets/style/colors";
 import { router } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
+import { GlobalContext } from "../../../context/globalContext";
+import { getPermissionAndGetPicture } from "../../../services/imagePickerService";
 
 export default function HistoryScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [secondModalVisible, setSecondModalVisible] = useState(false); // État pour la deuxième modal
+  const {
+    selectedPicture,
+    setSelectedPicture,
+    setChatLog,
+    gptMode,
+    setLoading,
+  } = useContext(GlobalContext);
 
   let [fontsLoaded] = useFonts({
     Inter_700Bold,
@@ -21,9 +31,14 @@ export default function HistoryScreen() {
     setModalVisible(true);
   };
 
-  const openSecondModal = () => {
-    setModalVisible(false);
-    setSecondModalVisible(true);
+  const openSecondModal = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status === "granted") {
+      setModalVisible(false);
+      setSecondModalVisible(true);
+    } else {
+      getPermissionAndGetPicture(setSelectedPicture, setChatLog);
+    }
   };
 
   const launchTchat = () => {
