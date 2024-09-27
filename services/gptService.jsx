@@ -18,7 +18,7 @@ export const askGpt = async (
 
   try {
     const response = await axios.post(
-      `http://192.168.1.24:3000/${gptMode}`,
+      `http://192.168.1.24:3000/${gptMode.mode}`,
       formData,
       {
         headers: {
@@ -29,7 +29,11 @@ export const askGpt = async (
 
     setChatLog((prevChatLog) => [
       ...prevChatLog,
-      { message: response.data.message.content, type: "texte" },
+      {
+        message: response.data.message.content,
+        type: "texte",
+        ton: gptMode.id,
+      },
     ]);
   } catch (error) {
     console.error(error);

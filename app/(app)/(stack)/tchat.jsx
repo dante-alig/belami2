@@ -5,6 +5,7 @@ import colors from "../../../assets/style/colors";
 import { GlobalContext } from "../../../context/globalContext";
 import { getPermissionAndGetPicture } from "../../../services/imagePickerService";
 import { askGpt } from "../../../services/gptService";
+import DiscussionThreads from "../../../components/discussionThreads";
 
 const Tchat = () => {
   const [loading, setLoading] = useState(false);
@@ -32,12 +33,7 @@ const Tchat = () => {
   return (
     <View style={styles.container}>
       <View style={styles.tchatContainer}>
-        {selectedPicture && (
-          <Image
-            source={{ uri: selectedPicture }}
-            style={{ height: 200, width: 200 }}
-          />
-        )}
+        <DiscussionThreads />
       </View>
       <View style={styles.buttonBox}>
         <ButtonCta func={link} CtaTitle="ajouter une image" />
