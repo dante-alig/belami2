@@ -11,9 +11,7 @@ const DiscussionThreads = () => {
     Inter_400Regular,
   });
   const { chatLog, loading, loadingPhoto } = useContext(GlobalContext);
-  useEffect(() => {
-    console.log(chatLog);
-  }, [loading]);
+  useEffect(() => {}, [loading]);
 
   return (
     <View>

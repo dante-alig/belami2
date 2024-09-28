@@ -4,10 +4,14 @@ export const GlobalContext = createContext();
 export const GlobalProvider = ({ children }) => {
   const [selectedPicture, setSelectedPicture] = useState(null);
   const [chatLog, setChatLog] = useState("");
-  const [gptMode, setGptMode] = useState({ mode: "aleatoire", visuel: "🔥" });
+  const [gptMode, setGptMode] = useState({
+    mode: "autoderision",
+    visuel: "😅",
+  });
   const [gptResponse, setGptResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingPhoto, setLoadingPhoto] = useState(false);
+  const [sessionNumber, setSessionNumber] = useState(0);
 
   return (
     <GlobalContext.Provider
@@ -24,6 +28,8 @@ export const GlobalProvider = ({ children }) => {
         setLoading,
         loadingPhoto,
         setLoadingPhoto,
+        sessionNumber,
+        setSessionNumber,
       }}
     >
       {children}

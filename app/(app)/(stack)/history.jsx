@@ -22,6 +22,8 @@ export default function HistoryScreen() {
     gptMode,
     setLoading,
     setLoadingPhoto,
+    sessionNumber,
+    setSessionNumber,
   } = useContext(GlobalContext);
 
   let [fontsLoaded] = useFonts({
@@ -33,6 +35,8 @@ export default function HistoryScreen() {
   };
 
   const openSecondModal = async () => {
+    setSessionNumber((prevSessionNumber) => prevSessionNumber + 1);
+    console.log(sessionNumber);
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status === "granted") {
       setModalVisible(false);

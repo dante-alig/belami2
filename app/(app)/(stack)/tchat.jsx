@@ -7,15 +7,18 @@ import { getPermissionAndGetPicture } from "../../../services/imagePickerService
 import { askGpt } from "../../../services/gptService";
 import DiscussionThreads from "../../../components/discussionThreads";
 import EmojiBar from "../../../components/emojiBar";
+import { saveChat } from "../../../services/saveChat";
 
 const Tchat = () => {
   const {
     selectedPicture,
     setSelectedPicture,
+    chatLog,
     setChatLog,
     gptMode,
     setLoading,
     setLoadingPhoto,
+    sessionNumber,
   } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -31,6 +34,13 @@ const Tchat = () => {
       );
     }
   }, [selectedPicture]);
+
+  useEffect(() => {
+    if (chatLog) {
+      console.log(JSON.stringify(chatLog));
+      saveChat(sessionNumber, chatLog);
+    }
+  }, [chatLog]);
 
   const link = () => {
     getPermissionAndGetPicture(setSelectedPicture, setChatLog, setLoadingPhoto);
