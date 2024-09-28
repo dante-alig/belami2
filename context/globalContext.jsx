@@ -12,6 +12,7 @@ export const GlobalProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [loadingPhoto, setLoadingPhoto] = useState(false);
   const [sessionNumber, setSessionNumber] = useState(0);
+  const [isChatSaved, setIsChatSaved] = useState(false);
 
   return (
     <GlobalContext.Provider
@@ -30,6 +31,8 @@ export const GlobalProvider = ({ children }) => {
         setLoadingPhoto,
         sessionNumber,
         setSessionNumber,
+        isChatSaved,
+        setIsChatSaved,
       }}
     >
       {children}

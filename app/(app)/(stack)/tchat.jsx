@@ -19,6 +19,8 @@ const Tchat = () => {
     setLoading,
     setLoadingPhoto,
     sessionNumber,
+    isChatSaved,
+    setIsChatSaved,
   } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -36,9 +38,10 @@ const Tchat = () => {
   }, [selectedPicture]);
 
   useEffect(() => {
-    if (chatLog) {
+    if (chatLog && !isChatSaved) {
       console.log(JSON.stringify(chatLog));
       saveChat(sessionNumber, chatLog);
+      setIsChatSaved(true);
     }
   }, [chatLog]);
 
