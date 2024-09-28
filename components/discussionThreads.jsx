@@ -10,9 +10,9 @@ const DiscussionThreads = () => {
   let [fontsLoaded] = useFonts({
     Inter_400Regular,
   });
-  const { chatLog, loading } = useContext(GlobalContext);
+  const { chatLog, loading, loadingPhoto } = useContext(GlobalContext);
   useEffect(() => {
-    console.log(loading);
+    console.log(chatLog);
   }, [loading]);
 
   return (
@@ -26,7 +26,7 @@ const DiscussionThreads = () => {
           ) : (
             <View style={styles.containerAI}>
               <View style={styles.tons}>
-                <Text style={styles.emoji}>{emojis[item.ton]}</Text>
+                <Text style={styles.emoji}>{item.visuel}</Text>
               </View>
               <View style={styles.messageContainer}>
                 <Text style={styles.messageSet}>{item.message}</Text>
@@ -38,11 +38,10 @@ const DiscussionThreads = () => {
       {loading && (
         <View style={styles.containerAI}>
           <View style={styles.tons}>
-            <Text style={styles.emoji}>🌐</Text>
+            <Text style={styles.emoji}>🤖</Text>
           </View>
-          <View style={styles.messageContainer}>
+          <View style={styles.loadingContainer}>
             <Image style={styles.animate} source={loadingAnim} />
-            <Text style={styles.messageSet}>Loading</Text>
           </View>
         </View>
       )}
@@ -78,6 +77,27 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     width: "70%",
   },
+  loadingContainer: {
+    backgroundColor: colors.darkSmooth,
+    width: "20%",
+    padding: 5,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 0,
+    alignItems: "center",
+  },
+  loadingPhotoContainer: {
+    height: 157,
+    width: 220,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 20,
+    alignSelf: "flex-end",
+    margin: 20,
+    backgroundColor: colors.darkSmooth,
+  },
   tons: {
     backgroundColor: colors.lightSmooth,
     borderRadius: 100,
@@ -85,7 +105,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     alignSelf: "flex-end",
-    margin: 7,
+    marginRight: 3,
   },
   containerAI: {
     width: "100%",
@@ -97,7 +117,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   animate: {
-    width: 60,
-    height: 60,
+    width: 30,
+    height: 30,
   },
 });

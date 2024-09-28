@@ -20,7 +20,7 @@ export default function IaScreen() {
             title="assistant ia"
             infos="Recevez le message parfait à lui envoyer pour augmenter vos chances d’obtenir un rendez-vous avec elle. "
           />
-          <ButtonCta func={link} CtaTitle="Lancer une discution" />
+          <ButtonCta func={link} CtaTitle="Commencer" />
         </View>
       </View>
     </>

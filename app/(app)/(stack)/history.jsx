@@ -21,6 +21,7 @@ export default function HistoryScreen() {
     setChatLog,
     gptMode,
     setLoading,
+    setLoadingPhoto,
   } = useContext(GlobalContext);
 
   let [fontsLoaded] = useFonts({
@@ -37,7 +38,11 @@ export default function HistoryScreen() {
       setModalVisible(false);
       setSecondModalVisible(true);
     } else {
-      getPermissionAndGetPicture(setSelectedPicture, setChatLog);
+      getPermissionAndGetPicture(
+        setSelectedPicture,
+        setChatLog,
+        setLoadingPhoto
+      );
     }
   };
 

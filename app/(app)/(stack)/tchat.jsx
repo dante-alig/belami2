@@ -6,6 +6,7 @@ import { GlobalContext } from "../../../context/globalContext";
 import { getPermissionAndGetPicture } from "../../../services/imagePickerService";
 import { askGpt } from "../../../services/gptService";
 import DiscussionThreads from "../../../components/discussionThreads";
+import EmojiBar from "../../../components/emojiBar";
 
 const Tchat = () => {
   const {
@@ -14,6 +15,7 @@ const Tchat = () => {
     setChatLog,
     gptMode,
     setLoading,
+    setLoadingPhoto,
   } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -22,12 +24,16 @@ const Tchat = () => {
       askGpt(selectedPicture, gptMode, setChatLog, setLoading);
       askGpt(selectedPicture, gptMode, setChatLog, setLoading);
     } else {
-      getPermissionAndGetPicture(setSelectedPicture, setChatLog);
+      getPermissionAndGetPicture(
+        setSelectedPicture,
+        setChatLog,
+        setLoadingPhoto
+      );
     }
   }, [selectedPicture]);
 
   const link = () => {
-    getPermissionAndGetPicture(setSelectedPicture, setChatLog);
+    getPermissionAndGetPicture(setSelectedPicture, setChatLog, setLoadingPhoto);
   };
 
   return (
@@ -36,6 +42,7 @@ const Tchat = () => {
         <DiscussionThreads />
       </View>
       <View style={styles.buttonBox}>
+        <EmojiBar />
         <ButtonCta func={link} CtaTitle="ajouter une image" />
       </View>
     </View>

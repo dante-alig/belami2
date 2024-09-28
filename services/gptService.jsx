@@ -32,7 +32,7 @@ export const askGpt = async (
       {
         message: response.data.message.content,
         type: "texte",
-        ton: gptMode.id,
+        visuel: gptMode.visuel,
       },
     ]);
   } catch (error) {

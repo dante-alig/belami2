@@ -4,9 +4,10 @@ export const GlobalContext = createContext();
 export const GlobalProvider = ({ children }) => {
   const [selectedPicture, setSelectedPicture] = useState(null);
   const [chatLog, setChatLog] = useState("");
-  const [gptMode, setGptMode] = useState({ mode: "aleatoire", id: "1" });
+  const [gptMode, setGptMode] = useState({ mode: "aleatoire", visuel: "🔥" });
   const [gptResponse, setGptResponse] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [loadingPhoto, setLoadingPhoto] = useState(false);
 
   return (
     <GlobalContext.Provider
@@ -21,6 +22,8 @@ export const GlobalProvider = ({ children }) => {
         setGptResponse,
         loading,
         setLoading,
+        loadingPhoto,
+        setLoadingPhoto,
       }}
     >
       {children}
